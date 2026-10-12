@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spesial Untuk Kamu 💖</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .custom-background {
+            /* ==========================================================
+               GANTI BACKGROUND:
+               Ubah link URL di bawah ini dengan foto background pilihan kamu.
+               ========================================================== */
+            background-image: url('https://images.unsplash.com/photo-1518895949257-7621c3c786d7?w=1200&h=800&fit=crop');
+            
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+    </style>
+</head>
+<body class="custom-background min-h-screen flex items-center justify-center p-4 font-sans text-gray-800">
+
+    <!-- HALAMAN 1: UTAMA (JOKES & NAVIGASI) -->
+    <div id="homePage" class="w-full max-w-md bg-white/90 backdrop-blur-md rounded-3xl shadow-2xl p-6 text-center transition-all duration-500">
+        <div class="mb-4">
+            <span class="text-4xl">💌</span>
+            <h1 class="text-2xl font-bold text-pink-600 mt-2">Special Space For Us</h1>
+            <p class="text-sm text-gray-500">Klik tombol di bawah buat senyum hari ini ya!</p>
+        </div>
+
+        <!-- Kotak Jokes -->
+        <div class="bg-pink-50 border border-pink-200 rounded-2xl p-5 my-6 shadow-inner min-h-[120px] flex items-center justify-center">
+            <p id="jokeText" class="text-gray-700 font-medium text-lg">"Kamu tahu gak bedanya kamu sama jam dinding? Kalau jam dinding muterin angka, kalau kamu muter-muter terus di pikiran aku."</p>
+        </div>
+
+        <!-- Tombol Swap Jokes -->
+        <button onclick="swapJoke()" class="w-full bg-pink-500 hover:bg-pink-600 text-white font-semibold py-3 px-4 rounded-xl shadow-md transition transform active:scale-95 mb-3">
+            🔄 Ganti Jokes Lucu
+        </button>
+
+        <!-- Tombol Pindah ke Halaman Kenangan -->
+        <button onclick="goToMemories()" class="w-full bg-rose-600 hover:bg-rose-700 text-white font-semibold py-3 px-4 rounded-xl shadow-md transition transform active:scale-95">
+            📸 Lihat Kenangan Kita
+        </button>
+    </div>
+
+    <!-- HALAMAN 2: KENANGAN (4 FOTO LANDSCAPE) -->
+    <div id="memoriesPage" class="hidden w-full max-w-3xl bg-white/95 backdrop-blur-md rounded-3xl shadow-2xl p-6 text-center transition-all duration-500">
+        <div class="mb-6 flex items-center justify-between">
+            <button onclick="goHome()" class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-lg text-sm font-semibold transition">
+                ← Kembali
+            </button>
+            <h2 class="text-xl font-bold text-pink-600">Kenangan Indah Kita ✨</h2>
+            <div class="w-16"></div>
+        </div>
+
+        <!-- Grid 4 Foto Landscape -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <!-- Foto 1 -->
+            <div class="bg-gray-100 rounded-xl overflow-hidden shadow-md group">
+                <div class="aspect-video overflow-hidden">
+                    <img src="foto1.jpeg" alt="Kenangan 1" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                </div>
+                <p class="p-2 text-sm text-gray-600 font-medium">kunti bogel</p>
+            </div>
+
+            <!-- Foto 2 -->
+            <div class="bg-gray-100 rounded-xl overflow-hidden shadow-md group">
+                <div class="aspect-video overflow-hidden">
+                    <img src="foto2.jpeg" alt="Kenangan 2" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                </div>
+                <p class="p-2 text-sm text-gray-600 font-medium"></p>
+            </div>
+
+            <!-- Foto 3 -->
+            <div class="bg-gray-100 rounded-xl overflow-hidden shadow-md group">
+                <div class="aspect-video overflow-hidden">
+                    <img src="foto3.jpeg" alt="Kenangan 3" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                </div>
+                <p class="p-2 text-sm text-gray-600 font-medium">Sipaling Imut</p>
+            </div>
+
+            <!-- Foto 4 -->
+            <div class="bg-gray-100 rounded-xl overflow-hidden shadow-md group">
+                <div class="aspect-video overflow-hidden">
+                    <img src="foto4.jpeg" alt="Kenangan 4" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                </div>
+                <p class="p-2 text-sm text-gray-600 font-medium">Sipaling Senyum Manis ❤️</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        const jokesList = [
+            "Kamu tahu gak bedanya kamu sama jam dinding? Kalau jam dinding muterin angka, kalau kamu muter-muter terus di pikiran aku.",
+            "Kabel apa yang bikin bahagia? Kabel-ut sama kamu selamanya.",
+            "Biskuit apa yang manis? Biskuit-cinta kita berdua.",
+            "Rumah apa yang paling nyaman? Rumah masa depan kita nanti.",
+            "Mandi apa yang bikin seger? Mandangin kamu tiap hari.",
+            "Dunia ini luas banget, tapi anehnya tiap kali aku merem, yang keliatan cuma muka kamu terus."
+        ];
+
+        let currentJokeIndex = 0;
+
+        function swapJoke() {
+            currentJokeIndex = (currentJokeIndex + 1) % jokesList.length;
+            const jokeElement = document.getElementById('jokeText');
+            
+            jokeElement.style.opacity = 0;
+            setTimeout(() => {
+                jokeElement.textContent = `"${jokesList[currentJokeIndex]}"`;
+                jokeElement.style.opacity = 1;
+            }, 150);
+        }
+
+        function goToMemories() {
+            document.getElementById('homePage').classList.add('hidden');
+            document.getElementById('memoriesPage').classList.remove('hidden');
+        }
+
+        function goHome() {
+            document.getElementById('memoriesPage').classList.add('hidden');
+            document.getElementById('homePage').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
